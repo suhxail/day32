@@ -1,38 +1,187 @@
-.App {
-  text-align: center;
+/* * {
+  margin: 0;
+  padding: 10;  
+  box-sizing: border-box;  
+  font-family: "Jost", sans-serif;
+} */
+.active {
+  background-color: #1d4ed8;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+nav {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  height: 10vh;
+  background-color: #0f172a;
+  color: white;
+  position: relative;
+  top: 0;
+  max-height: min-content;
+}
+
+nav .title {
+  font-size: 1.5rem;
+  margin: 1rem;
+  font-weight: bold;
+  text-decoration: none;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+nav ul {
+  display: flex;
+  margin-left: 88%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+nav ul li {
+  list-style: none;
+}
+
+nav ul li a {
+  display: block;
+  text-decoration: none;
+  color: white;
+  padding: 0.5rem;
+  margin: 0 0.5rem;
+  border-radius: 0.5rem;
+}
+
+nav ul li a:not(.active):hover {
+  background-color: #172554;
+}
+
+nav .menu {
+  display: none;
+  /* position: absolute; */
+  top: 0.75rem;
+  right: 0.5rem;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 2.25rem;
+  height: 2rem;
+}
+
+nav .menu span {
+  height: 0.4rem;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 0.2rem;
+}
+
+
+@media (max-width: 480px) {
+  nav .menu {
+    display: flex;
   }
-  to {
-    transform: rotate(360deg);
+
+  nav {
+    flex-direction: column;
+    align-items: flex-start;
   }
+
+  nav ul {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 0.25rem;
+  }
+
+  nav ul.open {
+    display: flex;
+  }
+
+  nav ul li {
+    width: 100%;
+    text-align: center;
+  }
+
+  nav ul li a {
+    margin: 0.2rem 0.5rem;
+  }
+}
+
+.bookList-icon,
+.memberList-icon {
+  margin-left: 90%;
+  font-size: xx-large;
+}
+
+.col {
+  margin-top: 15px;
+}
+.Tab {
+  background-color: white;
+}
+
+.memberList-icon-text {
+  margin-left: 83%;
+}
+
+.dashboard{
+  margin-top: 20px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.auth-form-container,
+.signin-form,
+.signup-form {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.signin-label,
+.signup-label {
+  text-align: left;
+  padding: 0.25rem 0;
+  font-size: 15px;
+}
+
+
+.signin-input,
+.signup-input {
+  margin: 0.5rem 0;
+  padding: 15px;
+  border: none;
+  border-radius: 10px;
+  background-color: wheat;
+}
+
+.modal-show {
+  display: block;
+  position: initial;
+  padding: 50px;
+}
+
+.modal-header,
+.modal-body,
+.modal-footer {
+  background-color: cadetblue;
+  padding: 0px;
 }
