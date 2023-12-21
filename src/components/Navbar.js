@@ -19,7 +19,6 @@ function Navbar() {
     const [memberIndex, setMemberIndex] = useState();
     const [memberList, setMemberList] = useState([]);
     const [loadMember, setLoadMember] = useState(false);
-    const [loadBook, setLoadBook] = useState(false);
 
 
     const membershipType = ["School Student", "University Graduate", "Employed"]
@@ -28,7 +27,7 @@ function Navbar() {
         axios
             .get('http://localhost:3011/books')
             .then(response => setBookList(response.data))
-    }, [loadBook])
+    }, [])
 
     const addBook = (book) => {
         let newBook = { ...book };
@@ -163,7 +162,7 @@ function Navbar() {
         let bookData = {};
 
 
-        bookData = updatedBooks[BookId - 1];
+        bookData = updateBook[BookId - 1];
 
         axios
             .put(`http://localhost:3011/books/${BookId}`, bookData)
@@ -178,10 +177,8 @@ function Navbar() {
             <nav>
                 <h3 className='nav-title'>Library Management System</h3>
             </nav>
-            <Routes>
-
-                {/* <Route path='/' element={<Home />} /> */}
-                <Route path='/' element={<Dashboard bookList={bookList} memberList={memberList} editBook={editBook} editMember={editMember} deleteBook={deleteBook} deleteMember={deleteMember} loadMember={loadMember} setLoadMember={setLoadMember} loadBook={loadBook} setLoadBook={setLoadBook} />} />
+            <Routes>                
+                <Route path='/' element={<Dashboard bookList={bookList} memberList={memberList} editBook={editBook} editMember={editMember} deleteBook={deleteBook} deleteMember={deleteMember} loadMember={loadMember} setLoadMember={setLoadMember} />} />
                 <Route path='/add-book' element={<AddBook addBook={addBook} />} />
                 <Route path='/add-member' element={<CreateMember addMember={addMember} membershipType={membershipType} />} />
                 <Route path='/edit-book/:id' element={<EditBook currentBook={currentBook} updateBook={updateBook} bookIndex={bookIndex} />} />
