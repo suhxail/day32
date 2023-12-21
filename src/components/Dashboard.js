@@ -8,7 +8,7 @@ import Button from 'react-bootstrap/Button';
 import Overlay from 'react-bootstrap/Overlay';
 import axios from 'axios';
 
-function Dashboard({ bookList, memberList, editBook, editMember, deleteBook, deleteMember, borrowBook, setLoadMember, loadMember, loadBook, setLoadBook }) {
+function Dashboard({ bookList, memberList, editBook, editMember, deleteBook, deleteMember, borrowBook, setLoadMember, loadMember}) {
   const [key, setKey] = useState('home');
   const [show, setShow] = useState(false);
   const target = useRef(null);
@@ -74,7 +74,7 @@ function Dashboard({ bookList, memberList, editBook, editMember, deleteBook, del
 
     await axios
       .put(`http://localhost:3011/books/${tempBook.id}`, tempBook)
-    setLoadBook(!loadBook)
+
   }
 
 
