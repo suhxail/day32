@@ -15,19 +15,27 @@ function Dashboard({ bookList, memberList, editBook, editMember, deleteBook, del
 
   const navigate = useNavigate();
 
-  const EditBook = (book, bookIndex) => {
-    editBook(book, bookIndex);
-    navigate(`edit-book/${book.id}`);
+  const EditBook = (book, bookIndex) => {   
+    editBook(book, bookIndex);    
+    if(book.borrowedMember.length != 0) {
+      alert("Cannot edit book while it is lended")
+    } else {
+      navigate(`edit-book/${book.id}`);
+    }
+    
     console.log(book)
   }
 
   const EditMember = (member, memberIndex) => {
     editMember(member, memberIndex);
-    navigate(`edit-member/${member.id}`)
+    if(member.booksBorrowed.length != 0) {
+      alert("Cannot edit member before returning all the books")
+    } else {
+      navigate(`edit-member/${member.id}`)
+    }
+    
     console.log(member)
-  }
-
-
+  } 
 
   const handleReturn = async (i, ind) => {
     console.log(i, ind)
@@ -63,23 +71,18 @@ function Dashboard({ bookList, memberList, editBook, editMember, deleteBook, del
       }
     })
 
-
     console.log(temp, a);
     temp["booksBorrowed"] = a;
     tempBook["borrowedMember"] = b
 
-    await axios
-      .put(`http://localhost:3012/members/${temp.id}`, temp)
+    await axios      
+      .put(`https://65afcf762f26c3f2139bccdc.mockapi.io/members/${temp.id}`, temp)
     setLoadMember(!loadMember)
 
-    await axios
-      .put(`http://localhost:3011/books/${tempBook.id}`, tempBook)
+    await axios     
+      .put(`https://65afcf762f26c3f2139bccdc.mockapi.io/books/${tempBook.id}`, tempBook)
 
   }
-
-
-
-
 
   return (
     <div className='dashboard'>
@@ -119,10 +122,7 @@ function Dashboard({ bookList, memberList, editBook, editMember, deleteBook, del
                     <td>{book.genre}</td>
                     <td>{book.quantity}</td>
                     <td>{book.quantity - book.borrowedMember.length}</td>
-                    <td>{book.borrowedMember.map(d => (<p>{d}</p>))}</td>
-
-
-
+                    <td>{book.borrowedMember && book.borrowedMember.map(d => (<p>{d}</p>))}</td>
                     {book ?
                       <td>
                         <button className="btn btn-primary" onClick={() => EditBook(book)} >Edit</button>
@@ -139,7 +139,6 @@ function Dashboard({ bookList, memberList, editBook, editMember, deleteBook, del
                       : ""
                     }
                   </tr>
-
                 ))}
 
               </thead>
@@ -164,8 +163,7 @@ function Dashboard({ bookList, memberList, editBook, editMember, deleteBook, del
                     <th>Actions</th>
                   </tr>
 
-                  {memberList && memberList.map((member, id) => {
-                    // member?.name &&
+                  {memberList && memberList.map((member, id) => {                   
                     console.log(member)
                     return <tr className="table-secondary" key={member.id}>
 

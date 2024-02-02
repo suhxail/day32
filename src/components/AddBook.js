@@ -35,10 +35,10 @@ function AddBook({ addBook }) {
             <form className="signin-form" >
               <label className="signin-label">Title of the book</label>
               <input className="signin-input" type='text' placeholder='Enter Title' name='title' onChange={formik.handleChange} value={formik.values.title} />
-              {/* <br></br> */}
+              
               <label className="signin-label">Name of the author</label>
               <input className="signin-input" type='text' placeholder='Enter name of the author' name='author' onChange={formik.handleChange} value={formik.values.author} />
-              {/* <br></br> */}
+             
               <label className="signin-label">Genre</label>
               <input className="signin-input" type='text' placeholder='Enter book genre' name='genre' onChange={formik.handleChange} value={formik.values.genre} />
 

@@ -33,8 +33,8 @@ function EditBook({ currentBook, updateBook }) {
   const { id } = useParams()
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:3011/books/${id}`)
+    axios      
+      .get(`https://65afcf762f26c3f2139bccdc.mockapi.io/books/${id}`)
       .then(response => {
         setBook(response.data); formik.setValues({
           id: response.data.id,

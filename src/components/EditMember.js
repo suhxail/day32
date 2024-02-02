@@ -36,8 +36,8 @@ function EditMember({ currentMember, updateMember, memberIndex, membershipType }
     const { id } = useParams();
 
     useEffect(() => {
-        axios
-            .get(`http://localhost:3012/members/${id}`)
+        axios           
+            .get(`https://65afcf762f26c3f2139bccdc.mockapi.io/members/${id}`)
             .then(response => {
                 setMember(response.data); formik.setValues({
                     id: response.data.id,
@@ -67,10 +67,10 @@ function EditMember({ currentMember, updateMember, memberIndex, membershipType }
                     <form className="signin-form">
                         <label className="signin-label">Name of the member</label>
                         <input className="signin-input" type='text' placeholder='Enter name of the member' name='name' onChange={formik.handleChange} value={formik.values.name} />
-                        {/* <br></br> */}
+                        
                         <label className="signin-label">Contact Number</label>
                         <input className="signin-input" type='text' placeholder='Enter Contact Number' name='contactNumber' onChange={formik.handleChange} value={formik.values.contactNumber} />
-                        {/* <br></br> */}
+                        
                         <label className="signin-label">Email</label>
                         <input className="signin-input" type='text' placeholder='Enter Email' name='email' onChange={formik.handleChange} value={formik.values.email} />
 

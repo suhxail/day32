@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 
-function BorrowBook({ bookList, borrowBook, showBorrowedMember }) {
+function BorrowBook({ bookList, borrowBook}) {
 
 
     const [book, setBook] = useState([]);
@@ -14,11 +14,10 @@ function BorrowBook({ bookList, borrowBook, showBorrowedMember }) {
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios
-            .get('http://localhost:3011/books')
+        axios            
+            .get('https://65afcf762f26c3f2139bccdc.mockapi.io/members')        
             .then(response => {
-                setBook(response.data);
-                // formik.setValues({ title: response.data.title, id:response.data.id})
+                setBook(response.data);                
             })
     }, [])
 

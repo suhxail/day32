@@ -25,7 +25,7 @@ function Navbar() {
 
     useEffect(() => {
         axios
-            .get('http://localhost:3011/books')
+            .get('https://65afcf762f26c3f2139bccdc.mockapi.io/books')
             .then(response => setBookList(response.data))
     }, [])
 
@@ -36,7 +36,7 @@ function Navbar() {
         setBookList([...bookList, newBook]);
 
         axios
-            .post('http://localhost:3011/books', newBook)
+            .post('https://65afcf762f26c3f2139bccdc.mockapi.io/books', newBook)
     }
 
     const editBook = (book, bookIndex) => {
@@ -53,7 +53,7 @@ function Navbar() {
         setBookList([...BookList]);
 
         axios
-            .put(`http://localhost:3011/books/${updatedBook.id}`, updatedBook)
+            .put(`https://65afcf762f26c3f2139bccdc.mockapi.io/books/${updatedBook.id}`, updatedBook)
     }
 
     const deleteBook = (id) => {
@@ -63,12 +63,13 @@ function Navbar() {
         console.log(newBookList);
 
         axios
-            .delete(`http://localhost:3011/books/${id}`)
+            .delete(`https://65afcf762f26c3f2139bccdc.mockapi.io/books/${id}`)
     }
 
     useEffect(() => {
+
         axios
-            .get('http://localhost:3012/members')
+            .get('https://65afcf762f26c3f2139bccdc.mockapi.io/members')
             .then(response => setMemberList(response.data))
     }, [loadMember])
 
@@ -80,7 +81,7 @@ function Navbar() {
         setMemberList([...memberList, newMember]);
 
         axios
-            .post('http://localhost:3012/members', newMember)
+            .post('https://65afcf762f26c3f2139bccdc.mockapi.io/members', newMember)
     }
 
     const editMember = (member, memberIndex) => {
@@ -95,7 +96,7 @@ function Navbar() {
         setMemberList([...MemberList]);
 
         axios
-            .put(`http://localhost:3012/members/${updatedMember.id}`, updatedMember)
+            .put(`https://65afcf762f26c3f2139bccdc.mockapi.io/members/${updatedMember.id}`, updatedMember)
     }
 
     const deleteMember = (id) => {
@@ -107,12 +108,13 @@ function Navbar() {
         console.log(newMemberList);
 
         axios
-            .delete(`http://localhost:3012/members/${id}`)
+            .delete(`https://65afcf762f26c3f2139bccdc.mockapi.io/members/${id}`)
     }
 
 
 
     const borrowBook = (BookId, MemberId) => {
+        console.log(BookId, MemberId)
         let data = {};
 
         let bookData = {};
@@ -140,36 +142,19 @@ function Navbar() {
         bookData = updatedBooks[BookId - 1];
 
         axios
-            .put(`http://localhost:3012/members/${MemberId}`, data);
+            .put(`https://65afcf762f26c3f2139bccdc.mockapi.io/members/${MemberId}`, data);
+
         axios
-            .get('http://localhost:3012/members')
+            .get('https://65afcf762f26c3f2139bccdc.mockapi.io/members')
             .then(response => setMemberList(response.data));
 
         axios
-            .put(`http://localhost:3011/books/${BookId}`, bookData)
+            .put(`https://65afcf762f26c3f2139bccdc.mockapi.io/books/${BookId}`, bookData)
             .then(response => {
                 axios
-                    .get('http://localhost:3011/books')
+                    .get('https://65afcf762f26c3f2139bccdc.mockapi.io/books')
                     .then(response => setBookList(response.data))
             })
-
-
-
-    }
-
-    const showBorrowedMember = (name, BookId) => {
-
-        let bookData = {};
-
-
-        bookData = updateBook[BookId - 1];
-
-        axios
-            .put(`http://localhost:3011/books/${BookId}`, bookData)
-
-        axios
-            .get('http://localhost:3011/books')
-            .then(response => setBookList(response.data))
     }
 
     return (
@@ -177,13 +162,13 @@ function Navbar() {
             <nav>
                 <h3 className='nav-title'>Library Management System</h3>
             </nav>
-            <Routes>                
+            <Routes>
                 <Route path='/' element={<Dashboard bookList={bookList} memberList={memberList} editBook={editBook} editMember={editMember} deleteBook={deleteBook} deleteMember={deleteMember} loadMember={loadMember} setLoadMember={setLoadMember} />} />
                 <Route path='/add-book' element={<AddBook addBook={addBook} />} />
                 <Route path='/add-member' element={<CreateMember addMember={addMember} membershipType={membershipType} />} />
                 <Route path='/edit-book/:id' element={<EditBook currentBook={currentBook} updateBook={updateBook} bookIndex={bookIndex} />} />
                 <Route path='/edit-member/:id' element={<EditMember currentMember={currentMember} updateMember={updateMember} memberIndex={memberIndex} membershipType={membershipType} />} />
-                <Route path='/borrow-book/:id' element={<BorrowBook bookList={bookList} borrowBook={borrowBook} showBorrowedMember={showBorrowedMember} />} />
+                <Route path='/borrow-book/:id' element={<BorrowBook bookList={bookList} borrowBook={borrowBook} />} />
             </Routes>
         </>
 
